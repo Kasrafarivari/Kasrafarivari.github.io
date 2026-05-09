@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI didn't replace user research — it just made the messy part bearable — Kasra Farivari</title>
+<meta name="description" content="How AI changed my user research synthesis workflow more than any other part of product management, and the failure modes I learned to spot.">
+<link rel="canonical" href="https://kasrafarivari.org/blog/ai-user-research-synthesis/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI didn't replace user research — it just made the messy part bearable">
+<meta property="og:description" content="How AI changed my synthesis workflow, and the failure modes to watch for.">
+<meta property="og:url" content="https://kasrafarivari.org/blog/ai-user-research-synthesis/">
+<meta property="article:published_time" content="2026-03-11">
+<meta property="article:author" content="Kasra Farivari">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AI didn't replace user research — it just made the messy part bearable",
+  "datePublished": "2026-03-11",
+  "dateModified": "2026-03-11",
+  "author": { "@type": "Person", "name": "Kasra Farivari", "url": "https://kasrafarivari.org/" },
+  "publisher": { "@type": "Person", "name": "Kasra Farivari" },
+  "mainEntityOfPage": "https://kasrafarivari.org/blog/ai-user-research-synthesis/",
+  "url": "https://kasrafarivari.org/blog/ai-user-research-synthesis/",
+  "description": "How AI changed my user research synthesis workflow, and the failure modes I learned to spot."
+}
+</script>
+</head>
+<body>
+<div class="container">
+
+<header class="site">
+  <div class="nav">
+    <a href="/" class="brand">Kasra Farivari</a>
+    <nav>
+      <a href="/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="post">
+<header class="post-header">
+  <h1>AI didn't replace user research — it just made the messy part bearable</h1>
+  <div class="post-meta">By Kasra Farivari · March 11, 2026 · 6 min read</div>
+</header>
+
+<p>If you've ever done user research as a PM, you know the secret: the interviews aren't the hard part.</p>
+
+<p>The hard part is the synthesis. You have eight 45-minute transcripts. Forty-three Slack snippets from the support channel. Sixty-one open-ended survey responses. NPS verbatims from the last three quarters. Somewhere in that pile is the answer to whatever question prompted the research, but extracting it requires reading every word, holding the pattern in your head, and then writing it down before it evaporates.</p>
+
+<p>I used to budget two full days for this part of any major research effort. I'd block my calendar, get a coffee, and grind. By the end of day two I'd have a doc that captured maybe 70% of what was in the source material.</p>
+
+<p>This is the part of the job that AI changed for me first, fastest, and most completely. Not because models replaced the synthesis — they don't, and the times I've let them try, I've gotten burned — but because they've changed the shape of the work in a way that took me from "two days of grinding" to "one focused afternoon."</p>
+
+<h2>What I actually do</h2>
+
+<p>The workflow I've landed on, after a lot of iteration:</p>
+
+<p><strong>Step 1: Dump everything into one document.</strong> All eight transcripts, all the survey responses, all the support tickets. Headers between sections so I can tell the model what's what. No interpretation, no notes — raw material.</p>
+
+<p><strong>Step 2: First pass — surface the topics.</strong> I prompt the model: "Read everything below. What are the 8–12 distinct topics that come up across this material? For each, give me a one-line description and three direct quotes." This is the part the model is genuinely great at. It can hold thirty thousand words in context and pull patterns I would have missed.</p>
+
+<p><strong>Step 3: Validate the topics by hand.</strong> This is the step people skip and it's the most important one. I read the source material with the topics list next to me. About 80% of the time the topics are right. About 20% of the time the model has confidently grouped two unrelated things, missed something obvious, or invented a theme that fits one quote and nothing else. If I trusted the topic list without checking, my synthesis would have a lie buried in it.</p>
+
+<p><strong>Step 4: Drill into each topic.</strong> Now that I have validated topics, I go back to the model with each one in turn. "For topic 3 (onboarding friction), pull every direct quote across all sources. Don't paraphrase, don't summarize, just pull the quotes." This gives me a clean stack of evidence per topic, which is what I actually need to write the synthesis.</p>
+
+<p><strong>Step 5: Write the synthesis myself.</strong> The doc I deliver — the one stakeholders read — I write by hand. The model has done the assembly work; I do the interpretation work.</p>
+
+<h2>What models are bad at, in user research specifically</h2>
+
+<p>Three failure modes I now watch for:</p>
+
+<p><strong>Plausible quotes that don't exist.</strong> Earlier model generations would invent quotes that sounded right. Newer models hallucinate less, but they still happen, especially when the source material is long. I've made it a habit to spot-check at least 20% of quotes against the originals. Every now and then I find one that isn't there.</p>
+
+<p><strong>Conflating frequency with importance.</strong> Models will surface "the most common topic" as the headline. But in user research, the most common topic is often a known issue you're already tracking. The valuable insight is usually the thing two people said, intensely, that nobody else mentioned. You have to specifically ask for that — "what's the most surprising thing in this material?" — and even then the model isn't great at it.</p>
+
+<p><strong>Smoothing out contradictions.</strong> Real user research is messy. Five users say the onboarding is too long; three say it's too short. A good synthesis sits with the contradiction. Models have a tendency to harmonize — "users have mixed feelings about onboarding length" — which is technically true and analytically useless. I write the contradictions explicitly, with quotes, in the synthesis.</p>
+
+<h2>Where humans still own it</h2>
+
+<p>The "what does this mean for the product" step is still entirely human. The model can tell me that users are frustrated with the new shop layout. It cannot tell me whether the right move is to revert the change, ship a fix, or reframe how we communicate the change. That decision draws on context the model doesn't have — roadmap, business pressure, what engineering is already mid-way through, what marketing has committed to. That's the PM's job, and I haven't found a useful way to outsource it.</p>
+
+<h2>What's better, on net</h2>
+
+<p>The biggest change is volume. I used to deliberately limit the size of my research efforts because synthesis time scaled brutally. Eight interviews was a lot; sixteen was a major project. Now I'll do twenty without thinking about it, because the marginal synthesis cost is small. That means the underlying research is broader and the patterns I find are more robust.</p>
+
+<p>The second change is that I no longer dread research. I used to push back on big research efforts because I knew what synthesis would cost me. Now I propose them. That shift alone has probably made me a better PM, independent of the AI.</p>
+
+<h2>The honest caveat, again</h2>
+
+<p>This works in mobile and consumer contexts where most data is text, English, and short-form. I haven't tried it on healthcare interviews, on regulated environments, or on multi-language research. My guess is the workflow holds but the verification step gets more important as the stakes go up.</p>
+
+<p>If you've found different workflows that work, I'd love to hear them. I'm at the <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn link in the footer</a>. And if you want to read more in this series, I wrote about <a href="/blog/how-i-use-ai-to-write-better-prds/">how I use AI for PRDs</a> and the <a href="/blog/ai-tools-i-use-every-day/">tools I open every day</a>.</p>
+
+</article>
+
+<a class="back-link" href="/blog/">← Back to all posts</a>
+
+</main>
+
+<footer class="site">
+  <div>© Kasra Farivari</div>
+  <div><a href="/">About</a> · <a href="/blog/">Blog</a> · <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a></div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How I use AI to write better PRDs — Kasra Farivari</title>
+<meta name="description" content="A year ago I'd have told you AI was useless for PRDs. Today it does the first 60% of every PRD I write. Here's the prompt structure that changed it.">
+<link rel="canonical" href="https://kasrafarivari.org/blog/how-i-use-ai-to-write-better-prds/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How I use AI to write better PRDs">
+<meta property="og:description" content="The prompt structure that turned AI from useless to indispensable for product specs.">
+<meta property="og:url" content="https://kasrafarivari.org/blog/how-i-use-ai-to-write-better-prds/">
+<meta property="article:published_time" content="2026-02-14">
+<meta property="article:author" content="Kasra Farivari">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How I use AI to write better PRDs",
+  "datePublished": "2026-02-14",
+  "dateModified": "2026-02-14",
+  "author": {
+    "@type": "Person",
+    "name": "Kasra Farivari",
+    "url": "https://kasrafarivari.org/"
+  },
+  "publisher": { "@type": "Person", "name": "Kasra Farivari" },
+  "mainEntityOfPage": "https://kasrafarivari.org/blog/how-i-use-ai-to-write-better-prds/",
+  "url": "https://kasrafarivari.org/blog/how-i-use-ai-to-write-better-prds/",
+  "description": "A year ago I'd have told you AI was useless for PRDs. Today it does the first 60% of every PRD I write."
+}
+</script>
+</head>
+<body>
+<div class="container">
+
+<header class="site">
+  <div class="nav">
+    <a href="/" class="brand">Kasra Farivari</a>
+    <nav>
+      <a href="/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="post">
+<header class="post-header">
+  <h1>How I use AI to write better PRDs</h1>
+  <div class="post-meta">By Kasra Farivari · February 14, 2026 · 6 min read</div>
+</header>
+
+<p>A year ago I would have told you that AI was useless for PRDs. The drafts it produced were generic, bullet-heavy, and read like LinkedIn posts. They had to be rewritten almost entirely, which meant I was doing two jobs — writing the PRD and editing a worse version of the PRD I'd written in my head.</p>
+
+<p>That was a year ago. Today, AI does the first 60% of every PRD I write. It hasn't replaced the work, but it's reshaped it in a way that, on net, has made my specs better. This post is about how I got there — what I changed, and which parts of the document I still write by hand.</p>
+
+<h2>What changed wasn't the model. It was the prompt structure.</h2>
+
+<p>When I started, my prompts looked like: "Write a PRD for a feature that lets users sort their game inventory by rarity." The output was always bad in the same way: it hallucinated a problem statement, invented users I'd never met, and proposed metrics that didn't fit the business.</p>
+
+<p>The shift was realizing the model couldn't write a good PRD from a one-line prompt because <em>I</em> couldn't write a good PRD from a one-line prompt. The information needed to write the document existed, but it was scattered across user calls, Slack threads, my notes, and my head. The job of the prompt wasn't to ask the model to write the PRD. It was to assemble what I already knew.</p>
+
+<h2>My current PRD prompt structure</h2>
+
+<p>I now feed the model six things, in this order:</p>
+
+<ol>
+<li><strong>Context dump.</strong> A 2–4 paragraph plain-English description of the situation — what the product is, who the user is, what's prompting this work, and what the constraints are. I write this myself, and it's by far the most important part of the prompt. Bad context dump = bad PRD, every time.</li>
+<li><strong>The problem.</strong> One paragraph on what specifically isn't working today. Not the solution, not the request from leadership. The actual user-facing problem.</li>
+<li><strong>What I've already considered.</strong> Three to five options, with a quick note on what I like and don't like about each. This is where AI starts to add real value: it pushes back on my framing and surfaces options I missed.</li>
+<li><strong>The constraints.</strong> Engineering, business, timeline, anything I know is fixed. "Has to ship in Q2," "can't change the data model," "must work in markets without high-quality LLM access," etc.</li>
+<li><strong>A reference to a good past PRD.</strong> I keep two specs in a folder that I'm proud of, and I paste one in as a stylistic anchor. This pushes the output toward my voice and my team's conventions.</li>
+<li><strong>The actual ask.</strong> "Draft a PRD covering [sections]. Be specific. Don't invent metrics, flag where I need to add them. Don't write fluff."</li>
+</ol>
+
+<p>The output of this is usually a draft I'd grade as a B-. Which is much better than where I started two years ago, when my own first drafts were a B- and it took me a full afternoon to produce one.</p>
+
+<h2>What I always still write by hand</h2>
+
+<p>Three sections of every PRD I write are still 100% me, with no AI involvement:</p>
+
+<p><strong>Success metrics.</strong> AI is bad at this in a way that took me a while to notice. It generates plausible-sounding metrics ("increase D7 retention by 5%") that don't actually map to the feature. Worse, it picks metrics that sound rigorous but are gameable. I write these myself.</p>
+
+<p><strong>Open questions.</strong> The whole point of this section is to surface my own uncertainty. AI's tendency to project confidence makes it actively harmful here. If I let the model write open questions, I get a list of resolved ones.</p>
+
+<p><strong>The summary at the top.</strong> Two sentences. They're the most-read part of the document and they need to sound like me. I haven't found a way to get a model to write a summary that sounds like a real PM rather than a TechCrunch headline.</p>
+
+<h2>What's gotten better, on net</h2>
+
+<p>A few things that are quietly different about my PRDs since I started doing this:</p>
+
+<p><strong>They're longer, but tighter.</strong> I used to skip sections when I was rushing. Now I always have a draft of every section, even if it's brief, because the model produces them all by default. That makes the document more complete.</p>
+
+<p><strong>They engage with edge cases more.</strong> When I prompt the model to draft a PRD, it asks itself questions like "what about this edge case?" that I sometimes wouldn't think to ask under deadline pressure. Maybe a third of those are useful. The other two-thirds are noise. But the third is real.</p>
+
+<p><strong>They get worse if I'm lazy with the context dump.</strong> This is the biggest pitfall and I still fall into it. If I half-ass the context, the document's structure looks fine but the substance is hollow. Reviewers don't always catch it. I don't always catch it.</p>
+
+<h2>The honest caveat</h2>
+
+<p>I've used Claude for the bulk of this. I've also used ChatGPT and, briefly, a few other tools. The differences between them on PRD work are smaller than the differences between a good prompt and a bad one. If you're not getting useful PRD drafts out of AI tools today, my strong guess is that the prompt is the problem, not the model.</p>
+
+<p>I'll write more about which tools I use day to day in <a href="/blog/ai-tools-i-use-every-day/">a later post on AI tooling</a>, and I'll write a separate post on <a href="/blog/ai-user-research-synthesis/">how I do user research synthesis with AI</a> — which has been an even bigger workflow shift than PRDs.</p>
+
+<p>Thanks for reading. If you want to send me your PRD prompts to compare, I'll read every one — drop me a note on <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a>.</p>
+
+</article>
+
+<p style="margin-top:48px;"><a href="/blog/">← Back to all posts</a></p>
+
+</main>
+
+<footer class="site">
+  <div>© Kasra Farivari</div>
+  <div><a href="/">About</a> · <a href="/blog/">Blog</a> · <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a></div>
+</footer>
+
+</div>
+</body>
+</html>

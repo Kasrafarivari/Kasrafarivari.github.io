@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What I look for when evaluating AI features as a PM — Kasra Farivari</title>
+<meta name="description" content="The checklist I run through before greenlighting an AI feature — latency, hallucination tolerance, fallback, eval cost, and the question that kills most pitches.">
+<link rel="canonical" href="https://kasrafarivari.org/blog/evaluating-ai-features/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What I look for when evaluating AI features as a PM">
+<meta property="og:description" content="The checklist I run through before greenlighting an AI feature.">
+<meta property="og:url" content="https://kasrafarivari.org/blog/evaluating-ai-features/">
+<meta property="article:published_time" content="2026-04-08">
+<meta property="article:author" content="Kasra Farivari">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What I look for when evaluating AI features as a PM",
+  "datePublished": "2026-04-08",
+  "dateModified": "2026-04-08",
+  "author": { "@type": "Person", "name": "Kasra Farivari", "url": "https://kasrafarivari.org/" },
+  "publisher": { "@type": "Person", "name": "Kasra Farivari" },
+  "mainEntityOfPage": "https://kasrafarivari.org/blog/evaluating-ai-features/",
+  "url": "https://kasrafarivari.org/blog/evaluating-ai-features/",
+  "description": "A practical checklist for evaluating AI features in consumer products."
+}
+</script>
+</head>
+<body>
+<div class="container">
+
+<header class="site">
+  <div class="nav">
+    <a href="/" class="brand">Kasra Farivari</a>
+    <nav>
+      <a href="/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<article class="post">
+<header class="post-header">
+  <h1>What I look for when evaluating AI features as a PM</h1>
+  <div class="post-meta">By Kasra Farivari · April 8, 2026 · 6 min read</div>
+</header>
+
+<p>There's a gap between how AI features get talked about externally and how they get talked about internally. Externally, the conversation is all about capability and "AI-powered." Internally, on a real product team, the conversation is mostly about failure modes.</p>
+
+<p>Most of the AI features that ship in consumer products today — and certainly the ones I've been involved in — get debated in the same handful of dimensions, every time. This post is the checklist I run through when I'm evaluating whether an AI feature is ready to ship, plus a few of the questions I've learned to ask early.</p>
+
+<p>It's not exhaustive, and it's biased toward consumer mobile, which is what I work on. But the structure should travel.</p>
+
+<h2>1. Latency</h2>
+
+<p>This is the first question I ask, because it's almost always the most underestimated. A model call that takes 2 seconds in the lab takes 4 in production with cold-start, network variance, and queueing. A 4-second response in a consumer mobile context is the difference between "magical" and "broken."</p>
+
+<p>Things I've learned to ask:</p>
+<ul>
+<li>What's the p50, p95, and p99 latency? Lab numbers are usually p50 — make sure you know the tail.</li>
+<li>What does the user see during that latency? "Loading" spinners drop conversion fast.</li>
+<li>Can the response be streamed? Streaming buys real perceived-latency wins.</li>
+</ul>
+
+<h2>2. Hallucination tolerance</h2>
+
+<p>Different features tolerate different amounts of model confabulation. A creative-writing assistant is allowed to make things up; a customer service bot answering account questions is not. I categorize features into three buckets:</p>
+
+<ul>
+<li><strong>Zero tolerance.</strong> The feature touches account state, financial data, legal information, or anything where a confident wrong answer harms the user.</li>
+<li><strong>Bounded tolerance.</strong> The feature is augmentative — the user is the final arbiter — and a wrong answer wastes time but doesn't harm.</li>
+<li><strong>High tolerance.</strong> Creative or generative use cases where "wrong" is in the eye of the user and they have other options.</li>
+</ul>
+
+<p>The bucket determines almost everything else: how much you spend on evals, what fallbacks you build, how prominent the AI labeling is.</p>
+
+<h2>3. Fallback behavior</h2>
+
+<p>When the model fails — and it will — what does the feature do? "Show an error" is a real answer, but rarely the right one. The good products have thought about this:</p>
+
+<ul>
+<li>Is there a non-AI version of the feature the user can fall back to?</li>
+<li>If the model is slow or down, does the feature gracefully degrade or hard-fail?</li>
+<li>If a user gets a bad result, is there an explicit feedback path?</li>
+</ul>
+
+<p>I push hard on this in design reviews. If the team can't tell me the fallback story in a sentence, the feature isn't ready.</p>
+
+<h2>4. Eval coverage</h2>
+
+<p>This is where teams get caught. Shipping an AI feature without an eval suite is like shipping a database feature without integration tests — it works in dev and breaks in ways you can't measure in prod.</p>
+
+<p>What I look for:</p>
+<ul>
+<li>A test set of at least 100 inputs covering the realistic distribution.</li>
+<li>Automated scoring on whatever dimension matters (correctness, refusal rate, tone, latency).</li>
+<li>A way to re-run the eval when prompts change, models change, or data drifts.</li>
+</ul>
+
+<p>Eval cost is real. For a serious feature, the eval suite costs more to maintain than the feature itself. That's a budget conversation I have with engineering early.</p>
+
+<h2>5. Cost per interaction</h2>
+
+<p>Most teams know the per-call cost of the model they're using. Fewer have done the math on what that translates to at the feature's expected usage level. The math has surprised me twice in my career, both times badly.</p>
+
+<p>The questions:</p>
+<ul>
+<li>What's the cost per request?</li>
+<li>What's the expected request volume in the first month, third month, year one?</li>
+<li>If usage 5x's, does the unit economics still work?</li>
+</ul>
+
+<p>I've killed two features at the spec stage because the per-user cost wouldn't pencil. Both times the engineer who'd built the prototype hadn't done the unit math.</p>
+
+<h2>6. Trust signals</h2>
+
+<p>This one is the most underrated. AI features in consumer products live or die by whether the user trusts the output. Trust is built by:</p>
+
+<ul>
+<li>Clear labeling (the user knows it's AI).</li>
+<li>Visible source attribution where applicable.</li>
+<li>A visible feedback affordance (thumbs, "this was wrong," etc.).</li>
+<li>Conservative claims. The feature should say "draft," "suggestion," or "starting point," not "answer."</li>
+</ul>
+
+<p>The first time we shipped an AI summary feature, we went too confident in the copy. The summaries were good — the feature was killed by users not trusting them, because the language oversold the model. We relabeled, didn't change the model, and engagement doubled.</p>
+
+<h2>7. The "what changes about the product if this works" question</h2>
+
+<p>This isn't a checklist item exactly, but it's the question I ask before greenlighting an AI feature. If the feature works perfectly, what does the product become?</p>
+
+<p>A lot of AI features pass the technical bar but fail this one. They work, they're well-built, they ship — and they don't change anything for the user. They're features that exist because AI exists, not because they make the product better.</p>
+
+<p>The strongest AI features I've seen, including ones I've worked on, are ones where the feature is genuinely impossible without AI. A summary of a hundred user reviews. A natural-language search across a messy product catalog. Adaptive onboarding that responds to what the user does. Those are the ones worth the eval cost, the latency budget, and the cognitive load on the team.</p>
+
+<h2>The takeaway</h2>
+
+<p>The pattern I've noticed across teams is that the ones who ship good AI features aren't the ones who use the latest model. They're the ones who treat AI as one more component in a product, with all the failure modes and tradeoffs that implies — not as a magic ingredient that makes a feature done. The checklist above is just an attempt to translate that mindset into a list of questions.</p>
+
+<p>Related: I wrote about <a href="/blog/how-i-use-ai-to-write-better-prds/">how I use AI to draft PRDs</a>, and I'll have a separate post on the <a href="/blog/ai-tools-i-use-every-day/">specific tools I open every day</a>. If you've shipped AI features and have war stories to add, find me on <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a>.</p>
+
+</article>
+
+<a class="back-link" href="/blog/">← Back to all posts</a>
+
+</main>
+
+<footer class="site">
+  <div>© Kasra Farivari</div>
+  <div><a href="/">About</a> · <a href="/blog/">Blog</a> · <a href="https://www.linkedin.com/in/kasrafarivari">LinkedIn</a></div>
+</footer>
+
+</div>
+</body>
+</html>
